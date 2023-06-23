@@ -1,2 +1,10 @@
+*.pyc
+
+.DS_Store
+.coverage
+
 build/
-upload/
+env*/
+
+src/*.egg-info/
+src/tokei/binaries/
