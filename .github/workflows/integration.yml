@@ -16,8 +16,7 @@ jobs:
         cd build/tokei
         cargo build --release
     - run: mkdir -p upload/${{ matrix.os }}
-    - run: cp build/tokei/target/release/tokei upload/${{ matrix.os }}/
-    - run: upload/${{ matrix.os }}/tokei --version
+    - run: cp build/tokei/target/release/* upload/${{ matrix.os }}/
     - uses: actions/upload-artifact@v3
       with:
         name: upload
