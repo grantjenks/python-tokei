@@ -18,7 +18,7 @@ jobs:
     - run: mkdir -p upload/${{ matrix.os }}
     - run: cp build/tokei/target/release/tokei upload/${{ matrix.os }}/
     - run: upload/${{ matrix.os }}/tokei --version
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: upload
         path: upload
