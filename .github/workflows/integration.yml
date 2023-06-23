@@ -12,11 +12,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: git clone https://github.com/XAMPPRocky/tokei.git --branch v12.1.2 build/tokei
-    - run: |
+    - name: Build Tokei
+      run: |
         cd build/tokei
         cargo build --release
     - run: mkdir -p upload/${{ matrix.os }}
-    - run: cp build/tokei/target/release/* upload/${{ matrix.os }}/
+    - run: cp build/tokei/target/release/tokei upload/${{ matrix.os }}/
+      if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
+    - run: cp build/tokei/target/release/tokei.exe upload/${{ matrix.os }}/
+      if: ${{ matrix.os == 'windows-latest' }}
     - uses: actions/upload-artifact@v3
       with:
         name: upload
