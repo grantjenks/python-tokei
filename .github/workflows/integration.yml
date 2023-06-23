@@ -11,14 +11,12 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v3
-    - run: mkdir build
-    - run: cd build
-    - run: git clone https://github.com/XAMPPRocky/tokei.git --branch v12.1.2
-    - run: cd tokei
-    - run: cargo build --release
-    - run: cd ../..
+    - run: git clone https://github.com/XAMPPRocky/tokei.git --branch v12.1.2 build/tokei
+    - run: |
+        cd build/tokei
+        cargo build --release
     - run: mkdir -p upload/${{ matrix.os }}
-    - run: cd build/tokei/target/release/tokei upload/${{ matrix.os }}/
+    - run: cp build/tokei/target/release/tokei upload/${{ matrix.os }}/
     - run: upload/${{ matrix.os }}/tokei --version
     - uses: actions/upload-artifact@v2
       with:
